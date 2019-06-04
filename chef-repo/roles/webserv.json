@@ -1,0 +1,20 @@
+{
+  "name": "webserv",
+  "description": "Role to install WordPress (apache, php)",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+ 
+  },
+  "override_attributes": {
+ 
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[wordpress::apache]",
+    "recipe[wordpress::php]",
+    "recipe[wordpress::download]"
+  ],
+  "env_run_lists": {
+ 
+  }
+}
