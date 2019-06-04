@@ -50,7 +50,6 @@ end
 
 %w{php php-fpm php-mysql php-xmlrpc php-gd php-pear php-pspell}.each do |pkg|
   package pkg do
-    flush_cache before: true
     action :install
     notifies :reload, 'service[httpd]', :immediately
   end
