@@ -21,21 +21,21 @@
 #  ignore_failure true
 #end
 
-yum_repository 'remi-php56' do
-    mirrorlist 'http://rpms.remirepo.net/enterprise/6/remi/mirror'
-    description "Remi's PHP 5.6 RPM repository for Enterprise Linux 5 - $basearch"
-    enabled true
-    gpgcheck true
-    gpgkey 'http://rpms.remirepo.net/RPM-GPG-KEY-remi'
-  end
+#yum_repository 'remi-php56' do
+#    mirrorlist 'http://rpms.remirepo.net/enterprise/6/remi/mirror'
+#    description "Remi's PHP 5.6 RPM repository for Enterprise Linux 5 - $basearch"
+#    enabled true
+#    gpgcheck true
+#    gpgkey 'http://rpms.remirepo.net/RPM-GPG-KEY-remi'
+#  end
 
-  yum_repository 'epel' do
-      mirrorlist 'http://mirrors.fedoraproject.org/mirrorlist?repo=epel-5&arch=$basearch'
-      description 'Extra Packages for Enterprise Linux 5 - $basearch'
-      enabled true
-      gpgcheck true
-      gpgkey 'http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL'
-    end
+#  yum_repository 'epel' do
+#      mirrorlist 'http://mirrors.fedoraproject.org/mirrorlist?repo=epel-5&arch=$basearch'
+#      description 'Extra Packages for Enterprise Linux 5 - $basearch'
+#      enabled true
+#      gpgcheck true
+#      gpgkey 'http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL'
+#    end
 
 
 package 'yum-utils' do
@@ -50,6 +50,7 @@ end
 
 %w{php php-fpm php-mysql php-xmlrpc php-gd php-pear php-pspell}.each do |pkg|
   package pkg do
+    flush_cache before: true
     action :install
     notifies :reload, 'service[httpd]', :immediately
   end
